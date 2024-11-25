@@ -23,12 +23,6 @@ router.post(
     login,
 )
 
-router.post(
-    '/logut/',
-    [
-        headerToken,
-    ],
-    logut,
-)
+router.post('/logut/', [headerToken], logut)
 
 export default router
