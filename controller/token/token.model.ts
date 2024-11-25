@@ -3,7 +3,7 @@ import redis from '../../config/redis'
 
 export const findToken = async (token: string) => {
     const dateLifeToken = await redis.get(token)
-    if (!dateLifeToken) return null
+    if (!dateLifeToken && typeof dateLifeToken !== 'string') return null
     return dateLifeToken
 }
 
@@ -14,7 +14,7 @@ export const findPayloadToken = async (token: string) => {
 export const createToken = async (payload: any = '') => {
     const token = jwt.sign(payload, process.env.JWT_SECRET!)
 
-    await redis.set(token, payload)
+    await redis.set(token, 'token')
     await redis.expire(token, 30 * 24 * 60 * 60)
 
     return token

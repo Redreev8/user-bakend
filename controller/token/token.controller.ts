@@ -14,7 +14,7 @@ export const getCheckToken = async (
         }
         const token = req.get('token')
         const result = await findToken(token!)
-        res.json(result ? true : false)
+        res.json(typeof result === 'string')
         return
     } catch (e) {
         console.log(e)

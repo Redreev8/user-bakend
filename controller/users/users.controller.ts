@@ -21,7 +21,7 @@ export const register = async (
         }
         const { name, password } = req.body
         const userCheck = await findUser(name)
-        if (!userCheck) {
+        if (userCheck) {
             res.status(400).json('Имя занято')
             return
         }
@@ -52,6 +52,7 @@ export const login = async (
         }
         const { name, password } = req.body
         const user = await findUser(name)
+        
         if (!user) {
             res.status(401).json('Имя или пороль не верны')
             return

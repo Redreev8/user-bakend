@@ -1,7 +1,6 @@
 import { Router } from 'express'
 import { register, login, logut } from './users.controller'
-import { body } from 'express-validator'
-import { headerToken } from '../token/token.router'
+import { body, header } from 'express-validator'
 
 const router = Router()
 
@@ -23,6 +22,14 @@ router.post(
     login,
 )
 
-router.post('/logut/', [headerToken], logut)
+router.post(
+    '/logut/', 
+    [
+        header('auth-token')
+            .isString()
+            .isLength({ min: 70 })
+    ], 
+    logut
+)
 
 export default router
