@@ -9,7 +9,7 @@ import isCheckToken from '../../middleware/is-check-token.middleware'
 
 const router = Router()
 
-const headerToken = header('auth-token')
+export const headerToken = header('auth-token')
     .isString()
     .isLength({ min: 100, max: 170 })
 

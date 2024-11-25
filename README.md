@@ -56,3 +56,12 @@
 - **payload** даные для токена
 
 возращает создает токен с payload придающимся в body
+
+### POST /logut/
+#### Header
+- **auth-token** jwt токен
+
+#### body
+- **payload** даные для токена
+
+уничтожает **auth-token**

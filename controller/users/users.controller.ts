@@ -2,7 +2,8 @@ import { Request, Response } from 'express'
 import { createUsers, findUser } from './users.model'
 import { validationResult } from 'express-validator'
 import bcrypt from 'bcryptjs'
-import { createToken } from '../token/token.model'
+import jwt from 'jsonwebtoken'
+import { createToken, removeToken } from '../token/token.model'
 import { getPayloadUser } from './user.dto'
 
 export const register = async (
@@ -62,6 +63,37 @@ export const login = async (
         }
         const token = await createToken(user)
         res.json(token)
+        return
+    } catch (e) {
+        console.log(e)
+        res.status(500).json({ message: 'Что пошло не так', erors: e })
+    }
+}
+
+export const logut = async (
+    req: Request,
+    res: Response,
+): Promise<undefined> => {
+    try {
+        const errors = validationResult(req)
+        if (!errors.isEmpty()) {
+            res.status(400).json({
+                message: 'Не передан токен',
+                ...errors,
+            })
+            return
+        }
+        const token = req.get('auth-token')
+        const user = jwt.decode(token!)
+        if (!user) {
+            res.status(400).json({
+                message: 'Не неверный токен',
+                ...errors,
+            })
+            return
+        }
+        await removeToken(token!)
+        res.json()
         return
     } catch (e) {
         console.log(e)

@@ -12,7 +12,7 @@ export const getCheckToken = async (
             res.status(400).json({ message: 'Не передан токен', ...errors })
             return
         }
-        const token = req.get('auth-token')
+        const token = req.get('token')
         const result = await findToken(token!)
         res.json(result ? true : false)
         return
@@ -32,7 +32,7 @@ export const getPayloadToken = async (
             res.status(400).json({ message: 'Не передан токен', ...errors })
             return
         }
-        const token = req.get('auth-token')
+        const token = req.get('token')
         const result = await findPayloadToken(token!)
         res.json(result)
         return

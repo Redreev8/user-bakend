@@ -19,3 +19,9 @@ export const createToken = async (payload: any = '') => {
 
     return token
 }
+
+export const removeToken = async (token: string) => {
+    const res = await redis.del(token)
+
+    return res
+}
