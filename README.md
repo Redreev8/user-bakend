@@ -16,9 +16,10 @@
     "prettier:check": "prettier --check \"**/*.ts\"",
     "lint": "eslint --ignore-path .eslintignore \"**/*.ts\" --fix",
     "lint:check": "eslint --ignore-path .eslintignore \"**/*.ts\"",
-    "build:compile": "npx babel --extensions .ts --out-dir dist --source-maps",
+    "build": "babel ./ --out-dir dist --extensions .ts --source-maps",
     "build:types": "tsc",
-    "dev": "npx ts-node app.ts"
+    "dev": "npx ts-node app.ts",
+    "start": "node ./dist/app.js"
 ```
 
 
