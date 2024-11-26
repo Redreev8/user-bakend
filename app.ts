@@ -5,7 +5,7 @@ import userRouter from './controller/users/users.router'
 import tokenRouter from './controller/token/token.router'
 import pool from './config/prosgres'
 import redis from './config/redis'
-import createUsersTable from './migrations/createUsersTable'
+import createTable from './migrations/createTable'
 
 dotenv.config()
 
@@ -22,7 +22,7 @@ pool.query('SELECT NOW()', async (err, res) => {
         console.error('Error connecting to the database', err.stack)
         return
     }
-    await createUsersTable()
+    await createTable()
     console.log('Connected to the database:', res.rows)
 })
 
