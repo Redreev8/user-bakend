@@ -1,9 +1,17 @@
 import { Request, Response } from 'express'
 import { validationResult } from 'express-validator'
-import { findActions, findAction, removeAction, createAction, changeAction } from './actons.model'
+import {
+    findActions,
+    findAction,
+    removeAction,
+    createAction,
+    changeAction,
+} from './actons.model'
 
-
-export const getActions = async (req: Request, res: Response): Promise<undefined> => {
+export const getActions = async (
+    req: Request,
+    res: Response,
+): Promise<undefined> => {
     try {
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
@@ -21,7 +29,10 @@ export const getActions = async (req: Request, res: Response): Promise<undefined
         res.status(500).json({ message: 'Что пошло не так', erors: e })
     }
 }
-export const getAction = async (req: Request, res: Response): Promise<undefined> => {
+export const getAction = async (
+    req: Request,
+    res: Response,
+): Promise<undefined> => {
     try {
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
@@ -40,7 +51,10 @@ export const getAction = async (req: Request, res: Response): Promise<undefined>
         res.status(500).json({ message: 'Что пошло не так', erors: e })
     }
 }
-export const postAction = async (req: Request, res: Response): Promise<undefined> => {
+export const postAction = async (
+    req: Request,
+    res: Response,
+): Promise<undefined> => {
     try {
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
@@ -59,7 +73,10 @@ export const postAction = async (req: Request, res: Response): Promise<undefined
         res.status(500).json({ message: 'Что пошло не так', erors: e })
     }
 }
-export const patchAction = async (req: Request, res: Response): Promise<undefined> => {
+export const patchAction = async (
+    req: Request,
+    res: Response,
+): Promise<undefined> => {
     try {
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
@@ -79,7 +96,10 @@ export const patchAction = async (req: Request, res: Response): Promise<undefine
         res.status(500).json({ message: 'Что пошло не так', erors: e })
     }
 }
-export const deleteAction = async (req: Request, res: Response): Promise<undefined> => {
+export const deleteAction = async (
+    req: Request,
+    res: Response,
+): Promise<undefined> => {
     try {
         const errors = validationResult(req)
         if (!errors.isEmpty()) {

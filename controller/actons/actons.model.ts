@@ -9,9 +9,7 @@ export interface Actions {
 }
 
 export const findActions = async (): Promise<Actions[]> => {
-    const result = await pool.query(
-        `SELECT * FROM ${nameTableActions}`,
-    )
+    const result = await pool.query(`SELECT * FROM ${nameTableActions}`)
     return result.rows
 }
 
@@ -24,9 +22,7 @@ export const findAction = async (id: string): Promise<Actions> => {
     return result.rows[0]
 }
 
-export const createAction = async (
-    action: string,
-): Promise<Actions> => {
+export const createAction = async (action: string): Promise<Actions> => {
     const result = await pool.query<Actions>(
         `INSERT INTO ${nameTableActions}(action) 
         VALUES ($1) RETURNING *`,
@@ -37,7 +33,7 @@ export const createAction = async (
 
 export const changeAction = async (
     id: string,
-    action: string
+    action: string,
 ): Promise<Actions> => {
     const result = await pool.query<Actions>(
         `UPDATE ${nameTableActions}
@@ -49,13 +45,11 @@ export const changeAction = async (
     return result.rows[0]
 }
 
-export const removeAction = async (
-    id: string,
-): Promise<Actions> => {
+export const removeAction = async (id: string): Promise<Actions> => {
     const result = await pool.query<Actions>(
         `DELETE FROM ${nameTableActions} 
         WHERE id=$1 RETURNING *`,
-        [id], 
+        [id],
     )
     return result.rows[0]
 }

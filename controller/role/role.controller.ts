@@ -1,9 +1,17 @@
 import { Request, Response } from 'express'
 import { validationResult } from 'express-validator'
-import { changeRole, createRole, finRole, finRoles, removeRole } from './role.model'
+import {
+    changeRole,
+    createRole,
+    finRole,
+    finRoles,
+    removeRole,
+} from './role.model'
 
-
-export const getRoles = async (req: Request, res: Response): Promise<undefined> => {
+export const getRoles = async (
+    req: Request,
+    res: Response,
+): Promise<undefined> => {
     try {
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
@@ -21,7 +29,10 @@ export const getRoles = async (req: Request, res: Response): Promise<undefined> 
         res.status(500).json({ message: 'Что пошло не так', erors: e })
     }
 }
-export const getRole = async (req: Request, res: Response): Promise<undefined> => {
+export const getRole = async (
+    req: Request,
+    res: Response,
+): Promise<undefined> => {
     try {
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
@@ -40,7 +51,10 @@ export const getRole = async (req: Request, res: Response): Promise<undefined> =
         res.status(500).json({ message: 'Что пошло не так', erors: e })
     }
 }
-export const postRole = async (req: Request, res: Response): Promise<undefined> => {
+export const postRole = async (
+    req: Request,
+    res: Response,
+): Promise<undefined> => {
     try {
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
@@ -59,7 +73,10 @@ export const postRole = async (req: Request, res: Response): Promise<undefined> 
         res.status(500).json({ message: 'Что пошло не так', erors: e })
     }
 }
-export const patchRole = async (req: Request, res: Response): Promise<undefined> => {
+export const patchRole = async (
+    req: Request,
+    res: Response,
+): Promise<undefined> => {
     try {
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
@@ -79,7 +96,10 @@ export const patchRole = async (req: Request, res: Response): Promise<undefined>
         res.status(500).json({ message: 'Что пошло не так', erors: e })
     }
 }
-export const deleteRole = async (req: Request, res: Response): Promise<undefined> => {
+export const deleteRole = async (
+    req: Request,
+    res: Response,
+): Promise<undefined> => {
     try {
         const errors = validationResult(req)
         if (!errors.isEmpty()) {

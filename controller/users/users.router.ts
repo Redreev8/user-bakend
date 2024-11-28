@@ -23,13 +23,9 @@ router.post(
 )
 
 router.post(
-    '/logut/', 
-    [
-        header('auth-token')
-            .isString()
-            .isLength({ min: 70 })
-    ], 
-    logut
+    '/logut/',
+    [header('auth-token').isString().isLength({ min: 70 })],
+    logut,
 )
 
 export default router

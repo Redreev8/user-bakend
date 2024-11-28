@@ -9,15 +9,13 @@ export interface Role {
 }
 
 export const finRoles = async (): Promise<Role[]> => {
-    const result = await pool.query(
-        `SELECT * FROM ${nameTableRole}`,
-    )
+    const result = await pool.query(`SELECT * FROM ${nameTableRole}`)
     return result.rows
 }
 
 export const finRole = async (id: string): Promise<Role> => {
-    console.log(true);
-    
+    console.log(true)
+
     const result = await pool.query(
         `SELECT * FROM ${nameTableRole} 
         WHERE id=$1`,
@@ -26,9 +24,7 @@ export const finRole = async (id: string): Promise<Role> => {
     return result.rows[0]
 }
 
-export const createRole = async (
-    name: string,
-): Promise<Role> => {
+export const createRole = async (name: string): Promise<Role> => {
     const result = await pool.query<Role>(
         `INSERT INTO ${nameTableRole}(name) 
         VALUES ($1) RETURNING *`,
@@ -37,10 +33,7 @@ export const createRole = async (
     return result.rows[0]
 }
 
-export const changeRole = async (
-    id: string,
-    name: string
-): Promise<Role> => {
+export const changeRole = async (id: string, name: string): Promise<Role> => {
     const result = await pool.query<Role>(
         `UPDATE ${nameTableRole}
         SET name = $1
@@ -51,13 +44,11 @@ export const changeRole = async (
     return result.rows[0]
 }
 
-export const removeRole = async (
-    id: string,
-): Promise<Role> => {
+export const removeRole = async (id: string): Promise<Role> => {
     const result = await pool.query<Role>(
         `DELETE FROM ${nameTableRole} 
         WHERE id=$1 RETURNING *`,
-        [id], 
+        [id],
     )
     return result.rows[0]
 }

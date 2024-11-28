@@ -15,10 +15,10 @@ const createUsersTable = async () => {
                 from information_schema.tables
                 where table_name = '${key}' 
                     and table_schema = 'public')::int as "column"
-            `)  
+            `)
             if (res.rows[0].column === 0) continue
             await pool.query(`DROP TABLE ${key}`)
-            console.log(`drop ${key}`); 
+            console.log(`drop ${key}`)
         }
     })
 }

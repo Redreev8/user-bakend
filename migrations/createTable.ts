@@ -3,16 +3,19 @@ import pool from '../config/prosgres'
 import path from 'path'
 
 export const sqls: { [key: string]: string } = {
-    'roles': 'create-role',
-    'actions': 'create-actions',
-    'role_actions': 'create-role-action',
-    'users': 'create-users',
+    roles: 'create-role',
+    actions: 'create-actions',
+    role_actions: 'create-role-action',
+    users: 'create-users',
 }
 
-export const sqlsKey = Object.keys(sqls).reduce((obj: { [key: string]: string }, key: string) => {
-    obj[key] = key
-    return obj
-}, {})
+export const sqlsKey = Object.keys(sqls).reduce(
+    (obj: { [key: string]: string }, key: string) => {
+        obj[key] = key
+        return obj
+    },
+    {},
+)
 
 const createUsersTable = async () => {
     for (const key in sqls) {
@@ -29,7 +32,7 @@ const createUsersTable = async () => {
             { encoding: 'utf-8' },
         )
         await pool.query(comands)
-        console.log(`create ${key}`);
+        console.log(`create ${key}`)
     }
 }
 

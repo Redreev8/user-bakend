@@ -24,7 +24,7 @@ export const findUser = async (name: string): Promise<User> => {
             GROUP BY u.id, r.name;
         `,
         [name],
-    )     
+    )
     return result.rows[0]
 }
 
@@ -44,8 +44,7 @@ export const createUsers = async (
         LEFT JOIN role_actions ra ON ra.role_id = r.id
         LEFT JOIN actions a ON ra.action_id = a.id
         GROUP BY u.id, u.name, r.name;
-        `
-        ,
+        `,
         [name, password],
     )
     return result.rows[0]
