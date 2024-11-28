@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken'
 import redis from '../../config/redis'
 
 export const findToken = async (token: string) => {
+    if (!token) return
     const dateLifeToken = await redis.get(token)
     if (!dateLifeToken && typeof dateLifeToken !== 'string') return null
     return dateLifeToken

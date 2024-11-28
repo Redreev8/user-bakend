@@ -3,6 +3,8 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import userRouter from './controller/users/users.router'
 import tokenRouter from './controller/token/token.router'
+import rolesRouter from './controller/role/role.router'
+import actionsRouter from './controller/actons/actons.router'
 import pool from './config/prosgres'
 import redis from './config/redis'
 import createTable from './migrations/createTable'
@@ -16,6 +18,8 @@ app.use(express.json())
 app.use(cors())
 app.use('/api', userRouter)
 app.use('/api', tokenRouter)
+app.use('/api', rolesRouter)
+app.use('/api', actionsRouter)
 
 pool.query('SELECT NOW()', async (err, res) => {
     if (err) {

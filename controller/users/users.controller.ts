@@ -21,6 +21,7 @@ export const register = async (
         }
         const { name, password } = req.body
         const userCheck = await findUser(name)
+        
         if (userCheck) {
             res.status(400).json('Имя занято')
             return
@@ -57,12 +58,13 @@ export const login = async (
             res.status(401).json('Имя или пороль не верны')
             return
         }
+
         const validPass = await bcrypt.compare(password, user.password)
         if (!validPass) {
             res.status(401).json('Имя или пороль не верны')
             return
         }
-        const token = await createToken(user)
+        const token = await createToken(getPayloadUser(user))
         res.json(token)
         return
     } catch (e) {

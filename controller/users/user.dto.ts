@@ -1,3 +1,3 @@
 import { User } from './users.model'
 
-export const getPayloadUser = ({ id, name }: User) => ({ id: id, name: name })
+export const getPayloadUser = ({ id, name, actions, role }: User) => ({ id, name, role, actions  })

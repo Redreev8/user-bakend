@@ -19,7 +19,9 @@
     "build": "babel ./ --out-dir dist --extensions .ts --source-maps",
     "build:types": "tsc",
     "dev": "npx ts-node app.ts",
-    "start": "node ./dist/app.js"
+    "start": "node ./dist/app.js",
+    "start": "node ./dist/app.js",
+    "drop": "npx ts-node ./migrations/dropTable.ts"
 ```
 
 

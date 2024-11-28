@@ -16,8 +16,6 @@ export const sqlsKey = Object.keys(sqls).reduce((obj: { [key: string]: string },
 
 const createUsersTable = async () => {
     for (const key in sqls) {
-        console.log(key);
-        
         const res = await pool.query(`
             select exists (select *
             from information_schema.tables
@@ -26,12 +24,12 @@ const createUsersTable = async () => {
         `)
 
         if (res.rows[0].column !== 0) continue
-        console.log(key);
         const comands = await fs.readFile(
             path.join('.', 'migrations', `${sqls[key]}.sql`),
             { encoding: 'utf-8' },
         )
         await pool.query(comands)
+        console.log(`create ${key}`);
     }
 }
 
