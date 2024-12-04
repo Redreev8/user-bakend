@@ -20,10 +20,19 @@
     "build:types": "tsc",
     "dev": "npx ts-node app.ts",
     "start": "node ./dist/app.js",
-    "start": "node ./dist/app.js",
     "drop": "npx ts-node ./migrations/dropTable.ts"
 ```
 
+## ENV
+```
+DB_USER=
+DB_HOST=
+DB_NAME=
+DB_PASSWORD=
+DB_PORT=
+
+JWT_SECRET=
+```
 
 ## Api
 ### POST /register/
@@ -68,3 +77,79 @@
 - **payload** даные для токена
 
 уничтожает **auth-token**
+
+### GET: /roles/
+#### Header
+- **auth-token** jwt токен
+
+возращает role-list
+
+### GET: /roles/:id
+#### Header
+- **auth-token** jwt токен
+
+возращает role
+
+### POST: /roles/
+#### Header
+- **auth-token** jwt токен
+#### body
+- **name** string
+
+возращает role
+
+### PATCH: /roles/:id
+#### Header
+- **auth-token** jwt токен
+#### body
+- **name** string
+
+возращает role
+
+### DELETE: /roles/:id
+#### Header
+- **auth-token** jwt токен
+
+пустую строку
+
+### GET: /actions/
+#### Header
+- **auth-token** jwt токен
+
+возращает actions-list
+
+### GET: /actions/:id
+#### Header
+- **auth-token** jwt токен
+
+возращает action
+
+### POST: /actions/
+#### Header
+- **auth-token** jwt токен
+#### body
+- **action** string
+
+возращает action
+
+### PATCH: /actions/:id
+#### Header
+- **auth-token** jwt токен
+#### body
+- **action** string
+
+возращает action
+
+### DELETE: /actions/:id
+#### Header
+- **auth-token** jwt токен
+
+пустую строку
+
+### PUT: /role-actions/:roleId
+#### Header
+- **auth-token** jwt токен
+#### Body
+- **actions** масив индексов action
+
+пустую строку
