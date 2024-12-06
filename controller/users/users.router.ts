@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import { register, login, logut } from './users.controller'
 import { body, header } from 'express-validator'
+import checkActionRole from '../../middleware/check-action-role'
 
 const router = Router()
 
@@ -24,7 +25,7 @@ router.post(
 
 router.post(
     '/logut/',
-    [header('auth-token').isString().isLength({ min: 70 })],
+    [checkActionRole(['auth-token'])],
     logut,
 )
 
