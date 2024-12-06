@@ -1,11 +1,10 @@
 import { Request, Response, NextFunction } from 'express'
 import { findPayloadToken, findToken } from '../controller/token/token.model'
-import { User } from '../controller/users/users.model'
-
-const checkTokenAction = (payload: User | string[], url: string) => {
-    if (Array.isArray(payload)) {
-        return payload.includes(url) || payload.includes('ALL')
-    }
+interface Payload {
+    actions: string[]
+}
+const checkTokenAction = (payload: Payload, url: string) => {
+    if (!payload.actions) return
     return payload.actions.includes(url) || payload.actions.includes('ALL')
 }
 
@@ -19,9 +18,9 @@ const checkActionRole = (
             if (!token) continue
             const isTokenRedis = await findToken(token)
             if (!isTokenRedis) continue
-            const payload = token ? await findPayloadToken(token) : null
+            const payload = await findPayloadToken(token)
             if (!payload) continue
-            if (checkTokenAction(payload as string[], request)) {
+            if (checkTokenAction(payload as Payload, request)) {
                 next()
                 return
             }
