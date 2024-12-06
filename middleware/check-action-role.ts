@@ -2,10 +2,7 @@ import { Request, Response, NextFunction } from 'express'
 import { findPayloadToken, findToken } from '../controller/token/token.model'
 import { User } from '../controller/users/users.model'
 
-const checkTokenAction = (
-    payload: User | string[] | string,
-    url: string,
-) => {
+const checkTokenAction = (payload: User | string[] | string, url: string) => {
     if (typeof payload === 'string') {
         return payload === url || payload === 'ALL'
     }
@@ -16,8 +13,8 @@ const checkTokenAction = (
 }
 
 const checkActionRole = (
-    nameTokens: string[]
-): ((req: Request, res: Response, next: NextFunction,) => void) => {
+    nameTokens: string[],
+): ((req: Request, res: Response, next: NextFunction) => void) => {
     return async (req, res, next) => {
         const request = `${req.method} ${req.path}`
         for (let i = 0; i < nameTokens.length; i++) {

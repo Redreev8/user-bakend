@@ -1,5 +1,4 @@
 import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
 import pool from '../config/prosgres'
 import { createUsers } from '../controller/users/users.model'
 import { sqlsKey } from '../migrations/createTable'

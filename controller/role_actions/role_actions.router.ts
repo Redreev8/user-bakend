@@ -11,7 +11,7 @@ const bodyAction = body('actions').isArray({ min: 1 })
 
 router.put(
     '/role-actions/:roleId',
-    [queryRole, bodyAction, checkActionRole(['auth-token','token'])],
+    [queryRole, bodyAction, checkActionRole(['auth-token', 'token'])],
     patchRoleActions,
 )
 

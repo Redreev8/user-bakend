@@ -14,14 +14,26 @@ const router = Router()
 const queryId = param('id').isInt({ min: 1 })
 const bodyAction = body('action', '').isString().isLength({ min: 2, max: 100 })
 
-router.get('/actions/', [checkActionRole(['auth-token','token'])], getActions)
-router.get('/actions/:id', [queryId, checkActionRole(['auth-token','token'])], getAction)
-router.post('/actions/', [bodyAction, checkActionRole(['auth-token','token'])], postAction)
+router.get('/actions/', [checkActionRole(['auth-token', 'token'])], getActions)
+router.get(
+    '/actions/:id',
+    [queryId, checkActionRole(['auth-token', 'token'])],
+    getAction,
+)
+router.post(
+    '/actions/',
+    [bodyAction, checkActionRole(['auth-token', 'token'])],
+    postAction,
+)
 router.patch(
     '/actions/:id',
-    [queryId, bodyAction, checkActionRole(['auth-token','token'])],
+    [queryId, bodyAction, checkActionRole(['auth-token', 'token'])],
     patchAction,
 )
-router.delete('/actions/:id', [queryId, checkActionRole(['auth-token','token'])], deleteAction)
+router.delete(
+    '/actions/:id',
+    [queryId, checkActionRole(['auth-token', 'token'])],
+    deleteAction,
+)
 
 export default router
