@@ -2,10 +2,7 @@ import { Request, Response, NextFunction } from 'express'
 import { findPayloadToken, findToken } from '../controller/token/token.model'
 import { User } from '../controller/users/users.model'
 
-const checkTokenAction = (payload: User | string[] | string, url: string) => {
-    if (typeof payload === 'string') {
-        return payload === url || payload === 'ALL'
-    }
+const checkTokenAction = (payload: User | string[], url: string) => {
     if (Array.isArray(payload)) {
         return payload.includes(url) || payload.includes('ALL')
     }
@@ -24,7 +21,7 @@ const checkActionRole = (
             if (!isTokenRedis) continue
             const payload = token ? await findPayloadToken(token) : null
             if (!payload) continue
-            if (checkTokenAction(payload as string, request)) {
+            if (checkTokenAction(payload as string[], request)) {
                 next()
                 return
             }

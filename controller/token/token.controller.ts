@@ -1,6 +1,7 @@
 import { validationResult } from 'express-validator'
 import { findToken, createToken, findPayloadToken } from './token.model'
 import { Request, Response } from 'express'
+import { User } from '../users/users.model'
 
 export const getCheckToken = async (
     req: Request,
@@ -51,6 +52,15 @@ export const postCreateToken = async (
         if (!errors.isEmpty()) {
             res.status(400).json({ message: 'Не передан токен', ...errors })
             return
+        }
+        const token = req.get('auth-token')
+        const user = await findPayloadToken(token!) as User
+        let payload = req.body.actions
+        if (Array.isArray(payload)) {
+            payload = payload.filter(el => {
+                if (typeof el !== 'string') return
+                return user.actions?.includes(el)
+            })
         }
         const result = await createToken(req.body)
         res.json(result)

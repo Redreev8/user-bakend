@@ -4,7 +4,7 @@ import {
     getPayloadToken,
     postCreateToken,
 } from './token.controller'
-import { header } from 'express-validator'
+import { body, header } from 'express-validator'
 import checkActionRole from '../../middleware/check-action-role'
 
 const router = Router()
@@ -19,7 +19,7 @@ router.get(
 )
 router.post(
     '/token/',
-    [headerToken, checkActionRole(['auth-token', 'token'])],
+    [checkActionRole(['auth-token']), body('actions').isArray({ min: 1 })],
     postCreateToken,
 )
 
