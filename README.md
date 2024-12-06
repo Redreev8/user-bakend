@@ -71,9 +71,9 @@ USER_PASSWORD=obsidanAnalog
 - **auth-token** jwt токен
 
 #### body
-- **payload** даные для токена
+- **actions** массив actions
 
-возращает создает токен с payload придающимся в body
+возращает создает токен с actions придающимся в body
 
 ### POST /logut/
 #### Header

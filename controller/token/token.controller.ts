@@ -54,15 +54,16 @@ export const postCreateToken = async (
             return
         }
         const token = req.get('auth-token')
-        const user = await findPayloadToken(token!) as User
+        const user = (await findPayloadToken(token!)) as User
         let payload = req.body.actions
         if (Array.isArray(payload)) {
-            payload = payload.filter(el => {
-                if (typeof el !== 'string') return
+            payload = payload.filter((el) => {
+                if (typeof el !== 'string') return false
+                if (user.actions.includes('ALL')) return true
                 return user.actions?.includes(el)
             })
         }
-        const result = await createToken(req.body)
+        const result = await createToken({ actions: payload })
         res.json(result)
         return
     } catch (e) {
