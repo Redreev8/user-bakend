@@ -1,8 +1,6 @@
 import { Router } from 'express'
 import { body, param } from 'express-validator'
-import {
-    patchRoleActions,
-} from './role-actions.controller'
+import { patchRoleActions } from './role-actions.controller'
 import checkActionRole from '../../middleware/check-action-role'
 import { finRole } from '../role/role.model'
 

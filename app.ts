@@ -9,6 +9,7 @@ import roleActionsRouter from './controller/role_actions/role_actions.router'
 import pool from './config/prosgres'
 import redis from './config/redis'
 import createTable from './migrations/createTable'
+import createFerstUser from './helper/create-ferst-user'
 
 dotenv.config()
 
@@ -30,6 +31,7 @@ pool.query('SELECT NOW()', async (err, res) => {
         return
     }
     await createTable()
+    await createFerstUser()
     console.log('Connected to the database:', res.rows)
 })
 

@@ -1,9 +1,6 @@
 import { Request, Response } from 'express'
 import { validationResult } from 'express-validator'
-import {
-    changeRoleActions,
-} from './role-actions.model'
-
+import { changeRoleActions } from './role-actions.model'
 
 export const patchRoleActions = async (
     req: Request,

@@ -32,7 +32,13 @@ DB_PASSWORD=
 DB_PORT=
 
 JWT_SECRET=
+
+USER_NAME=insanus
+USER_PASSWORD=obsidanAnalog
 ```
+
+## Первый пользователь
+Если пользователей нет то он создасться и выводит в консоль token
 
 ## Api
 ### POST /register/
