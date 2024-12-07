@@ -33,8 +33,8 @@ DB_PORT=
 
 JWT_SECRET=
 
-USER_NAME=insanus
-USER_PASSWORD=obsidanAnalog
+USER_NAME=
+USER_PASSWORD=
 ```
 
 ## Первый пользователь
