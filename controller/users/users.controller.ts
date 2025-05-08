@@ -16,6 +16,7 @@ export const register = async (
             res.status(400).json({
                 message: 'Имя или пороль не валидны',
                 ...errors,
+                body: req.body,
             })
             return
         }
@@ -48,6 +49,7 @@ export const login = async (
             res.status(400).json({
                 message: 'Имя или пороль не валидны',
                 ...errors,
+                body: req.body,
             })
             return
         }
