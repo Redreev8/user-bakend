@@ -15,9 +15,7 @@
 
 ```json
     "prettier": "prettier --write \"**/*.ts\"",
-    "prettier:check": "prettier --check \"**/*.ts\"",
-    "lint": "eslint --ignore-path .eslintignore \"**/*.ts\" --fix",
-    "lint:check": "eslint --ignore-path .eslintignore \"**/*.ts\"",
+    "lint": "eslint .",
     "build": "babel ./ --out-dir dist --extensions .ts --source-maps",
     "build:types": "tsc",
     "dev": "npx ts-node app.ts",
