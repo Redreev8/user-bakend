@@ -8,7 +8,6 @@ export default defineConfig([
     eslint.configs.recommended,
     tseslint.configs.recommended,
     eslintPluginPrettierRecommended,
-    // { rules: pluginNode.rules },
     pluginPromise.configs['flat/recommended'],
     globalIgnores(['.volumes/*', '.node_modules/*', '.build/*']),
     {
