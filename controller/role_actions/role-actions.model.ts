@@ -23,19 +23,6 @@ export const findActionsRole = async (idRole: number) => {
     return rows.map((r) => r.action)
 }
 
-// `WITH newUser as (
-//     INSERT INTO ${nameTableUser}(name, password)
-//     VALUES ($1, $2, #$)
-//     RETURNING  *
-// ) SELECT
-//     u.id, u.name, r.name as role,  array_agg(a.action) as actions
-// FROM newUser u
-// LEFT JOIN roles r ON r.id = u.role_id
-// LEFT JOIN role_actions ra ON ra.role_id = r.id
-// LEFT JOIN actions a ON ra.action_id = a.id
-// GROUP BY u.id, u.name, r.name;
-// `,
-
 export const changeRoleActions = async (
     id: string,
     actions: string[],

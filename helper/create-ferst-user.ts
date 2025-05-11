@@ -19,7 +19,8 @@ const createFerstUser = async () => {
     const salt = await bcrypt.genSalt(10)
     const hasPassword = await bcrypt.hash(password, salt)
     const user = await createUsers(name, hasPassword, 2)
-    const token = await createToken(getPayloadUser(user))
+    const token = await createToken(getPayloadUser(user), user.id)
+    console.log(user.id)
     console.log(token)
 }
 

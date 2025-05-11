@@ -3,7 +3,7 @@ import { changeRoleUser, createUsers, findUser } from './users.model'
 import { validationResult } from 'express-validator'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
-import { createToken, removeToken } from '../token/token.model'
+import { createToken, findTokensValue, removeToken } from '../token/token.model'
 import { getPayloadUser } from './user.dto'
 
 export const register = async (
@@ -30,7 +30,7 @@ export const register = async (
         const salt = await bcrypt.genSalt(10)
         const hasPassword = await bcrypt.hash(password, salt)
         const user = await createUsers(name, hasPassword)
-        const token = await createToken(getPayloadUser(user))
+        const token = await createToken(getPayloadUser(user), user.id)
         res.json(token)
         return
     } catch (e) {
@@ -66,7 +66,7 @@ export const login = async (
             res.status(401).json('Имя или пороль не верны')
             return
         }
-        const token = await createToken(getPayloadUser(user))
+        const token = await createToken(getPayloadUser(user), user.id)
         res.json(token)
         return
     } catch (e) {
@@ -91,6 +91,8 @@ export const putChangeRoleUser = async (
         }
         const { idUser, newRoleId } = req.body
         await changeRoleUser(idUser, newRoleId)
+        const tokens = await findTokensValue(idUser)
+        tokens.forEach((token) => removeToken(token))
         res.json(newRoleId)
         return
     } catch (e) {
