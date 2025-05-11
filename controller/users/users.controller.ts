@@ -1,14 +1,10 @@
 import { Request, Response } from 'express'
-import { changeRoleUser, createUsers, findUser, findUsers } from './users.model'
+import { changeRoleUser, createUsers, findUser } from './users.model'
 import { validationResult } from 'express-validator'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { createToken, removeToken } from '../token/token.model'
 import { getPayloadUser } from './user.dto'
-
-export const getUsers = async (req: Request, res: Response) => {
-    res.json(await findUsers())
-}
 
 export const register = async (
     req: Request,

@@ -1,17 +1,9 @@
 import { Router } from 'express'
-import {
-    register,
-    login,
-    logut,
-    getUsers,
-    putChangeRoleUser,
-} from './users.controller'
+import { register, login, logut, putChangeRoleUser } from './users.controller'
 import { body } from 'express-validator'
 import checkActionRole from '../../middleware/check-action-role'
 
 const router = Router()
-
-router.get('/users/', [checkActionRole(['auth-token'])], getUsers)
 
 router.post(
     '/register/',

@@ -12,18 +12,6 @@ export interface User {
     actions?: string[]
 }
 
-export const findUsers = async () => {
-    const result = await pool.query(
-        `
-            SELECT 
-               *
-            FROM ${nameTableUser} 
-        `,
-        [],
-    )
-    return result.rows
-}
-
 export const findUser = async (name: string): Promise<User> => {
     const result = await pool.query(
         `
