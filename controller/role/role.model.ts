@@ -14,8 +14,6 @@ export const finRoles = async (): Promise<Role[]> => {
 }
 
 export const finRole = async (id: string): Promise<Role> => {
-    console.log(true)
-
     const result = await pool.query(
         `SELECT * FROM ${nameTableRole} 
         WHERE id=$1`,

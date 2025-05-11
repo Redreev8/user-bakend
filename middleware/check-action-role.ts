@@ -1,11 +1,13 @@
 import { Request, Response, NextFunction } from 'express'
 import { findPayloadToken, findToken } from '../controller/token/token.model'
+import { findActionsRole } from '../controller/role_actions/role-actions.model'
 interface Payload {
-    actions: string[]
+    role_id: number
 }
-const checkTokenAction = (payload: Payload, url: string) => {
-    if (!payload.actions) return
-    return payload.actions.includes(url) || payload.actions.includes('ALL')
+const checkTokenAction = async (payload: Payload, url: string) => {
+    if (!payload.role_id) return
+    const actions = await findActionsRole(payload.role_id)
+    return actions.includes(url) || actions.includes('ALL')
 }
 
 const checkActionRole = (
@@ -17,10 +19,11 @@ const checkActionRole = (
             const token = req.get(nameTokens[i])
             if (!token) continue
             const isTokenRedis = await findToken(token)
+            console.log(isTokenRedis)
             if (!isTokenRedis) continue
             const payload = await findPayloadToken(token)
             if (!payload) continue
-            if (checkTokenAction(payload as Payload, request)) {
+            if (await checkTokenAction(payload as Payload, request)) {
                 next()
                 return
             }

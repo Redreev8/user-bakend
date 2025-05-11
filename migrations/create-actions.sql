@@ -18,3 +18,6 @@ INSERT INTO actions (action) VALUES ('DELETE /roles/:id'); -- 9
 INSERT INTO actions (action) VALUES ('GET /check-token/'); -- 10
 INSERT INTO actions (action) VALUES ('GET /token-payload/'); -- 11
 INSERT INTO actions (action) VALUES ('POST /token/'); -- 12
+
+
+INSERT INTO actions (action) VALUES ('PUT /user/change-role/'); -- 13

@@ -1,8 +1,7 @@
 import { User } from './users.model'
 
-export const getPayloadUser = ({ id, name, actions, role }: User) => ({
+export const getPayloadUser = ({ id, name, role_id }: User) => ({
     id,
     name,
-    role,
-    actions,
+    role_id,
 })

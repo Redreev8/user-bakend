@@ -1,10 +1,14 @@
 import { Request, Response } from 'express'
-import { createUsers, findUser } from './users.model'
+import { changeRoleUser, createUsers, findUser, findUsers } from './users.model'
 import { validationResult } from 'express-validator'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { createToken, removeToken } from '../token/token.model'
 import { getPayloadUser } from './user.dto'
+
+export const getUsers = async (req: Request, res: Response) => {
+    res.json(await findUsers())
+}
 
 export const register = async (
     req: Request,
@@ -68,6 +72,30 @@ export const login = async (
         }
         const token = await createToken(getPayloadUser(user))
         res.json(token)
+        return
+    } catch (e) {
+        console.log(e)
+        res.status(500).json({ message: 'Что пошло не так', erors: e })
+    }
+}
+
+export const putChangeRoleUser = async (
+    req: Request,
+    res: Response,
+): Promise<undefined> => {
+    try {
+        const errors = validationResult(req)
+        if (!errors.isEmpty()) {
+            res.status(400).json({
+                message: 'Имя или пороль не валидны',
+                ...errors,
+                body: req.body,
+            })
+            return
+        }
+        const { idUser, newRoleId } = req.body
+        await changeRoleUser(idUser, newRoleId)
+        res.json(newRoleId)
         return
     } catch (e) {
         console.log(e)

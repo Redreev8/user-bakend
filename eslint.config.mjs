@@ -5,11 +5,11 @@ import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import pluginPromise from 'eslint-plugin-promise'
 
 export default defineConfig([
+    globalIgnores(['./volumes/*', './node_modules/*', './dist/*']),
     eslint.configs.recommended,
     tseslint.configs.recommended,
     eslintPluginPrettierRecommended,
     pluginPromise.configs['flat/recommended'],
-    globalIgnores(['.volumes/*', '.node_modules/*', '.build/*']),
     {
         rules: {
             '@typescript-eslint/no-unused-vars': 'error',

@@ -18,7 +18,7 @@ const createFerstUser = async () => {
     const password = process.env.USER_PASSWORD!
     const salt = await bcrypt.genSalt(10)
     const hasPassword = await bcrypt.hash(password, salt)
-    const user = await createUsers(name, hasPassword)
+    const user = await createUsers(name, hasPassword, 2)
     const token = await createToken(getPayloadUser(user))
     console.log(token)
 }

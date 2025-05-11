@@ -59,7 +59,7 @@ export const postCreateToken = async (
         if (Array.isArray(payload)) {
             payload = payload.filter((el) => {
                 if (typeof el !== 'string') return false
-                if (user.actions.includes('ALL')) return true
+                if (user.actions && user.actions.includes('ALL')) return true
                 return user.actions?.includes(el)
             })
         }
